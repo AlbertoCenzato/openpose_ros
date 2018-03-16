@@ -14,7 +14,7 @@ DEFINE_bool(disable_multi_thread,       false,          "It would slightly reduc
 DEFINE_int32(profile_speed,             1000,           "If PROFILER_ENABLED was set in CMake or Makefile.config files, OpenPose will show some"
                                                         " runtime statistics at this frame number.");
 // OpenPose
-DEFINE_string(model_folder,             "/home/tim/Robin/openpose/models/",      "Folder path (absolute or relative) where the models (pose, face, ...) are located.");
+DEFINE_string(model_folder,             "/usr/local/lib/openpose_models/",      "Folder path (absolute or relative) where the models (pose, face, ...) are located.");
 DEFINE_string(output_resolution,        "-1x-1",        "The image resolution (display and output). Use \"-1x-1\" to force the program to use the"
                                                         " input image resolution.");
 DEFINE_int32(num_gpu,                   -1,             "The number of GPU devices to use. If negative, it will use all the available GPUs in your"
@@ -76,7 +76,7 @@ DEFINE_string(face_net_resolution,      "368x368",      "Multiples of 16 and squ
                                                         " detector. 320x320 usually works fine while giving a substantial speed up when multiple"
                                                         " faces on the image.");
 // OpenPose Hand
-DEFINE_bool(hand,                       false,          "Enables hand keypoint detection. It will share some parameters from the body pose, e.g."
+DEFINE_bool(hand,                       true,          "Enables hand keypoint detection. It will share some parameters from the body pose, e.g."
                                                         " `model_folder`. Analogously to `--face`, it will also slow down the performance, increase"
                                                         " the required GPU memory and its speed depends on the number of people.");
 DEFINE_string(hand_net_resolution,      "368x368",      "Multiples of 16 and squared. Analogous to `net_resolution` but applied to the hand keypoint"
@@ -86,7 +86,7 @@ DEFINE_int32(hand_scale_number,         1,              "Analogous to `scale_num
 DEFINE_double(hand_scale_range,         0.4,            "Analogous purpose than `scale_gap` but applied to the hand keypoint detector. Total range"
                                                         " between smallest and biggest scale. The scales will be centered in ratio 1. E.g. if"
                                                         " scaleRange = 0.4 and scalesNumber = 2, then there will be 2 scales, 0.8 and 1.2.");
-DEFINE_bool(hand_tracking,              false,          "Adding hand tracking might improve hand keypoints detection for webcam (if the frame rate"
+DEFINE_bool(hand_tracking,              true,          "Adding hand tracking might improve hand keypoints detection for webcam (if the frame rate"
                                                         " is high enough, i.e. >7 FPS per GPU) and video. This is not person ID tracking, it"
                                                         " simply looks for hands in positions at which hands were located in previous frames, but"
                                                         " it does not guarantee the same person ID among frames.");
@@ -107,7 +107,7 @@ DEFINE_double(render_threshold,         0.05,           "Only estimated keypoint
                                                         " rendered. Generally, a high threshold (> 0.5) will only render very clear body parts;"
                                                         " while small thresholds (~0.1) will also output guessed and occluded keypoints, but also"
                                                         " more false positives (i.e. wrong detections).");
-DEFINE_int32(render_pose,               -1,             "Set to 0 for no rendering, 1 for CPU rendering (slightly faster), and 2 for GPU rendering"
+DEFINE_int32(render_pose,               2,             "Set to 0 for no rendering, 1 for CPU rendering (slightly faster), and 2 for GPU rendering"
                                                         " (slower but greater functionality, e.g. `alpha_X` flags). If -1, it will pick CPU if"
                                                         " CPU_ONLY is enabled, or GPU if CUDA is enabled. If rendering is enabled, it will render"
                                                         " both `outputData` and `cvOutputData` with the original image and desired body part to be"

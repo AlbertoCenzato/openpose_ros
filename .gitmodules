@@ -1,0 +1,3 @@
+[submodule "modules/openpose-1.2.1"]
+	path = modules/openpose-1.2.1
+	url = https://github.com/CMU-Perceptual-Computing-Lab/openpose.git

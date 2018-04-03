@@ -53,6 +53,8 @@ namespace openpose_ros {
             void publishImageTopics(const std::shared_ptr<std::vector<op::Datum>>& datumsPtr);
 
             void publishPersonCountTopic(const std::shared_ptr<std::vector<op::Datum>>& datumsPtr);
+
+            void publishHumanListTopic(const std::shared_ptr<std::vector<op::Datum>>& datumsPtr);
     };
 }
 

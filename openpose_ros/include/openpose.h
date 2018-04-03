@@ -28,7 +28,6 @@ namespace openpose_ros {
             const op::WrapperStructFace wrapperStructFace;
             const op::WrapperStructHand wrapperStructHand;
 
-            //const op::DisplayMode displayMode;
             const bool displayMode;
             const bool guiVerbose;
             const bool fullScreen;

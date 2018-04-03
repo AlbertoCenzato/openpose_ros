@@ -80,3 +80,5 @@ fabric.properties
 *.exe
 *.out
 *.app
+
+openpose_ros/\.idea/

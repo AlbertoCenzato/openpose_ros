@@ -86,9 +86,10 @@ void OpenPoseROSIO::processImage(const sensor_msgs::ImageConstPtr& msg)
     std::shared_ptr<std::vector<op::Datum>> datumProcessed;
     if (successfullyEmplaced && openpose_->waitAndPop(datumProcessed))
     {
-        publishImageTopics(datumProcessed);
+        auto timestamp = ros::Time::now();
+        publishImageTopics(datumProcessed, timestamp);
         publishPersonCountTopic(datumProcessed);
-        publishHumanListTopic(datumProcessed);
+        publishHumanListTopic(datumProcessed, timestamp);
     }
     else
     {
@@ -149,7 +150,7 @@ bool OpenPoseROSIO::display(const std::shared_ptr<std::vector<op::Datum>>& datum
     return (key == 27);
 }
 
-void OpenPoseROSIO::publishImageTopics(const std::shared_ptr<std::vector<op::Datum>>& datumsPtr){
+void OpenPoseROSIO::publishImageTopics(const std::shared_ptr<std::vector<op::Datum>> &datumsPtr, ros::Time timestamp) {
     auto outputIm = datumsPtr->at(0).cvOutputData;
     cv::putText(outputIm, "Person count: " + std::to_string(datumsPtr->at(0).poseKeypoints.getSize(0)),
                 cv::Point(25,25),
@@ -157,6 +158,8 @@ void OpenPoseROSIO::publishImageTopics(const std::shared_ptr<std::vector<op::Dat
 
 
     sensor_msgs::ImagePtr img = cv_bridge::CvImage(std_msgs::Header(), "bgr8", outputIm).toImageMsg();
+
+    img->header.stamp = timestamp;
     openpose_image_.publish(img);
 }
 
@@ -168,7 +171,7 @@ void OpenPoseROSIO::publishPersonCountTopic(const std::shared_ptr<std::vector<op
     openpose_human_count_pub_.publish(msg);
 }
 
-void OpenPoseROSIO::publishHumanListTopic(const std::shared_ptr<std::vector<op::Datum>>& datumsPtr)
+void OpenPoseROSIO::publishHumanListTopic(const std::shared_ptr<std::vector<op::Datum>> &datumsPtr, ros::Time timestamp)
 {
     openpose_ros_msgs::OpenPoseHumanList msg;
     const auto &datum = datumsPtr->at(0);
@@ -183,6 +186,7 @@ void OpenPoseROSIO::publishHumanListTopic(const std::shared_ptr<std::vector<op::
         getRightHandKeyPoints(datum, human, i);
     }
 
+    msg.header.stamp = timestamp;
     openpose_human_list_pub_.publish(msg);
 }
 

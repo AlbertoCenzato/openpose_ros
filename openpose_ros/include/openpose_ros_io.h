@@ -50,11 +50,11 @@ namespace openpose_ros {
 
             bool display(const std::shared_ptr<std::vector<op::Datum>>& datumsPtr);
 
-            void publishImageTopics(const std::shared_ptr<std::vector<op::Datum>>& datumsPtr);
+            void publishImageTopics(const std::shared_ptr<std::vector<op::Datum>> &datumsPtr, ros::Time timestamp);
 
             void publishPersonCountTopic(const std::shared_ptr<std::vector<op::Datum>>& datumsPtr);
 
-            void publishHumanListTopic(const std::shared_ptr<std::vector<op::Datum>>& datumsPtr);
+            void publishHumanListTopic(const std::shared_ptr<std::vector<op::Datum>> &datumsPtr, ros::Time timestamp);
     };
 }
 

@@ -81,12 +81,12 @@ void OpenPoseROSIO::processImage(const sensor_msgs::ImageConstPtr& msg)
     std::shared_ptr<std::vector<op::Datum>> datumToProcess = createDatum();
 
     bool successfullyEmplaced = openpose_->waitAndEmplace(datumToProcess);
-    
+
     // Pop frame
     std::shared_ptr<std::vector<op::Datum>> datumProcessed;
     if (successfullyEmplaced && openpose_->waitAndPop(datumProcessed))
     {
-        auto timestamp = ros::Time::now();
+        auto timestamp = msg->header.stamp;
         publishImageTopics(datumProcessed, timestamp);
         publishPersonCountTopic(datumProcessed);
         publishHumanListTopic(datumProcessed, timestamp);

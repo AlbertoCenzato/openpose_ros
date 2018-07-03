@@ -18,7 +18,7 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules")
 
 # find_package(CUDA REQUIRED) # Uncomment this line if you have trouble compiling
 
-set(OpenCV_DIR /usr/local/opencv/opencv-3.4_cuda8/share/OpenCV)
+#set(OpenCV_DIR /usr/local/opencv/opencv-3.4_cuda8/share/OpenCV)
 
 find_package(OpenCV REQUIRED)
 find_package(GFlags)

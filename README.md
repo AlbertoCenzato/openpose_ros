@@ -19,7 +19,7 @@ Tested on:
    ```
 2. Clone this repository into your catkin_workspace/src directory.
    ```bash
-   git clone https://github.com/firephinx/openpose_ros.git
+   git clone https://github.com/AlbertoCenzato/openpose_ros.git
    ```
 3. Modify the model_folder line in openpose_ros/src/gflags_options.cpp to where openpose is installed.
    ```bash
